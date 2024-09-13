@@ -14,7 +14,7 @@ import static dte.hostagechecker.hostage.CaptivityStatus.RETURNED;
 import static dte.hostagechecker.hostage.LifeStatus.ALIVE;
 import static dte.hostagechecker.hostage.LifeStatus.DEAD;
 
-public class N12Provider extends OnlineJsonProvider
+public class N12Provider extends AbstractListProvider
 {
     public N12Provider()
     {
