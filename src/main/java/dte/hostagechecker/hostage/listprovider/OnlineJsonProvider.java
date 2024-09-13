@@ -2,11 +2,10 @@ package dte.hostagechecker.hostage.listprovider;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.machinezoo.noexception.Exceptions;
 import dte.hostagechecker.hostage.Hostage;
 import dte.hostagechecker.jackson.JsonNodeUtils;
 
-import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -26,7 +25,6 @@ public abstract class OnlineJsonProvider extends AbstractListProvider
     protected OnlineJsonProvider(String name, URI endpoint)
     {
         super(name);
-
         this.endpoint = endpoint;
     }
 
@@ -52,16 +50,16 @@ public abstract class OnlineJsonProvider extends AbstractListProvider
             JsonNode bodyNode = this.jsonMapper.readTree(response.body());
 
             return JsonNodeUtils.asList(navigateToHostageArray(bodyNode)).stream()
-                    .map(this::parseHostage)
+                    .map(Exceptions.sneak().function(this::parseHostage))
                     .toList();
         }
-        catch(IOException exception)
+        catch(Exception exception)
         {
-            throw new UncheckedIOException(exception);
+            throw new RuntimeException(exception);
         }
     }
 
-    protected abstract JsonNode navigateToHostageArray(JsonNode bodyNode) throws IOException;
+    protected abstract JsonNode navigateToHostageArray(JsonNode bodyNode) throws Exception;
 
-    protected abstract Hostage parseHostage(JsonNode hostageNode);
+    protected abstract Hostage parseHostage(JsonNode hostageNode) throws Exception;
 }

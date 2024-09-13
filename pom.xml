@@ -40,6 +40,12 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>com.machinezoo.noexception</groupId>
+			<artifactId>noexception</artifactId>
+			<version>1.9.1</version>
+		</dependency>
+
 	</dependencies>
 
 </project>

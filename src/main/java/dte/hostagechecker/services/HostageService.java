@@ -1,5 +1,6 @@
 package dte.hostagechecker.services;
 
+import dte.hostagechecker.exceptions.HostageFetchingException;
 import dte.hostagechecker.hostage.Hostage;
 import dte.hostagechecker.hostage.listprovider.HostageListProvider;
 import org.slf4j.Logger;
@@ -7,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.concurrent.CompletionException;
 
 @Service
 public class HostageService
@@ -22,8 +24,17 @@ public class HostageService
 
     public Collection<Hostage> getHostages()
     {
-        LOGGER.info("Fetching hostage list from {}.", this.hostageListProvider.getName());
+        LOGGER.info("Fetching hostage list from \"{}\".", this.hostageListProvider.getName());
 
-        return this.hostageListProvider.fetchHostages().join();
+        try
+        {
+            return this.hostageListProvider.fetchHostages().join();
+        }
+        catch(CompletionException exception)
+        {
+            LOGGER.error("Exception fetching the hostage list from \"{}\"", this.hostageListProvider.getName(), exception.getCause());
+
+            throw new HostageFetchingException();
+        }
     }
 }
