@@ -14,7 +14,7 @@ import static dte.hostagechecker.hostage.CaptivityStatus.RETURNED;
 import static dte.hostagechecker.hostage.LifeStatus.ALIVE;
 import static dte.hostagechecker.hostage.LifeStatus.DEAD;
 
-public class N12Provider extends OnlineJsonProvider
+public class N12Provider extends AbstractListProvider
 {
     public N12Provider()
     {
@@ -22,13 +22,13 @@ public class N12Provider extends OnlineJsonProvider
     }
 
     @Override
-    protected JsonNode navigateToHostageArray(JsonNode bodyNode)
+    protected JsonNode navigateToHostageArray(JsonNode bodyNode) throws Exception
     {
         return bodyNode.get("rows"); //are the hostages just database rows?
     }
 
     @Override
-    protected Hostage parseHostage(JsonNode hostageNode)
+    protected Hostage parseHostage(JsonNode hostageNode) throws Exception
     {
         String firstName = hostageNode.get("b").asText();
         String lastName = hostageNode.get("c").asText();

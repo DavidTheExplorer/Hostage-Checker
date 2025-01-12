@@ -18,7 +18,7 @@ public class HostageSerializer extends JsonObjectSerializer<Hostage>
         Age age = hostage.age();
 
         generator.writeStringField("first_name", hostage.firstName());
-        generator.writeStringField("last_name", hostage.firstName());
+        generator.writeStringField("last_name", hostage.lastName());
         generator.writeObjectField("age", age.isKnown() ? age.value() : "Unknown");
         generator.writeStringField("captivity_status", hostage.captivityStatus().name());
         generator.writeStringField("is_alive", hostage.lifeStatus().name());
