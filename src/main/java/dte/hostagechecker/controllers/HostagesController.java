@@ -1,6 +1,6 @@
 package dte.hostagechecker.controllers;
 
-import dte.hostagechecker.hostage.Hostage;
+import dte.hostagechecker.dto.HostageListDTO;
 import dte.hostagechecker.services.HostageService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +20,7 @@ public class HostagesController
     }
 
     @GetMapping
-    public Collection<Hostage> getHostages()
+    public HostageListDTO getHostages()
     {
         return this.hostageService.getHostages();
     }
