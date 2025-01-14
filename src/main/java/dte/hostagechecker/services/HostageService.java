@@ -29,7 +29,7 @@ public class HostageService
     @Cacheable("hostages")
     public HostageListDTO getHostages()
     {
-        LOGGER.info("Fetching hostage list from \"{}\".", this.hostageListProvider.getName());
+        LOGGER.debug("Fetching hostage list from \"{}\".", this.hostageListProvider.getName());
 
         try
         {
@@ -49,6 +49,6 @@ public class HostageService
     @CacheEvict("hostages")
     void clearHostageCache()
     {
-        LOGGER.info("Hostages cache was cleared.");
+        LOGGER.debug("Hostages cache was cleared.");
     }
 }
