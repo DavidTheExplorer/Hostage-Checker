@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.machinezoo.noexception.Exceptions;
 import dte.hostagechecker.hostage.Hostage;
-import dte.hostagechecker.jackson.JsonNodeUtils;
+import dte.hostagechecker.utils.JsonNodeUtils;
 
 import java.net.URI;
 import java.net.http.HttpClient;
