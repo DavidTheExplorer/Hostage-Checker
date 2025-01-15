@@ -1,7 +1,12 @@
 package dte.hostagechecker.hostage;
 
-public record Hostage(String firstName, String lastName, Age age, CaptivityStatus captivityStatus, LifeStatus lifeStatus)
+public record Hostage(String firstName, String lastName, Double age, CaptivityStatus captivityStatus, LifeStatus lifeStatus)
 {
+    public boolean hasKnownAge()
+    {
+        return this.age != null;
+    }
+
     public boolean wasReturned()
     {
         return this.captivityStatus == CaptivityStatus.RETURNED;
@@ -10,5 +15,13 @@ public record Hostage(String firstName, String lastName, Age age, CaptivityStatu
     public boolean isAlive()
     {
         return this.lifeStatus == LifeStatus.ALIVE;
+    }
+
+    public boolean isMinor()
+    {
+        if(!hasKnownAge())
+            return false;
+
+        return this.age < 18;
     }
 }

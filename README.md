@@ -1,8 +1,13 @@
 # Hostage Checker
 Web API that provides all public information about every hostage from October 7th.\
-The response is a simple and detailed JSON list, where every item represents one hostage.
+The response of its [single endpoint](https://hostage-checker.onrender.com/hostages) is comprised of the following:
+- A detailed list where every item represents an hostage.
+- Numerical statistics(Commonly accessed).
 
-## How to Query
-The API has a single endpoint: https://hostage-checker.onrender.com/hostages \
-The response(updated to 12/02/2025) after formatting, looks like this:\
-![image](https://github.com/user-attachments/assets/361d25d8-833f-440f-8811-32ca0360dc26)
+## Response Structure
+![image](https://github.com/user-attachments/assets/7218b1e6-f7aa-4aba-918f-cb35a17e9d1a)
+
+## Important Info
+- The "*last_updated*" date is relative to Israel's timezone.
+- Responses  are cached for **30 minutes** - Please open an issue if it goes above that.
+- The API is currently hosted on a free hosting - it may take a few minutes to get a response.

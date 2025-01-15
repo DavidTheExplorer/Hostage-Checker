@@ -5,6 +5,7 @@ import dte.hostagechecker.exceptions.HostageFetchingException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import static org.springframework.http.HttpStatus.*;
 
@@ -23,5 +24,12 @@ public class GlobalExceptionHandler
         exception.printStackTrace();
 
         return ErrorResponse.asResponseEntity(INTERNAL_SERVER_ERROR, "Internal Server Error");
+    }
+
+    //prevent non-existent endpoints from spamming the console
+    @ExceptionHandler
+    public ResponseEntity<ErrorResponse> handle(NoResourceFoundException exception)
+    {
+        return ErrorResponse.asResponseEntity(NOT_FOUND, "No resource found.");
     }
 }

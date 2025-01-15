@@ -1,4 +1,4 @@
-package dte.hostagechecker.jackson;
+package dte.hostagechecker.utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 

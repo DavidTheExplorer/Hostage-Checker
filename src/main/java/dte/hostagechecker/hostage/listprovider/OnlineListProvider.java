@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.machinezoo.noexception.Exceptions;
 import dte.hostagechecker.hostage.Hostage;
-import dte.hostagechecker.jackson.JsonNodeUtils;
+import dte.hostagechecker.utils.JsonNodeUtils;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -14,16 +14,16 @@ import java.net.http.HttpResponse.BodyHandlers;
 import java.util.Collection;
 import java.util.concurrent.CompletableFuture;
 
-public abstract class AbstractListProvider implements HostageListProvider
+public abstract class OnlineListProvider implements HostageListProvider
 {
     private final String name;
-    private final URI endpoint;
 
     //request data
+    private final URI endpoint;
     private final HttpClient httpClient = HttpClient.newBuilder().build();
     private final JsonMapper jsonMapper = new JsonMapper();
 
-    protected AbstractListProvider(String name, URI endpoint)
+    protected OnlineListProvider(String name, URI endpoint)
     {
         this.name = name;
         this.endpoint = endpoint;

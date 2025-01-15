@@ -1,7 +1,6 @@
 package dte.hostagechecker.hostage.listprovider;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import dte.hostagechecker.hostage.Age;
 import dte.hostagechecker.hostage.CaptivityStatus;
 import dte.hostagechecker.hostage.Hostage;
 import dte.hostagechecker.hostage.LifeStatus;
@@ -14,7 +13,7 @@ import static dte.hostagechecker.hostage.CaptivityStatus.RETURNED;
 import static dte.hostagechecker.hostage.LifeStatus.ALIVE;
 import static dte.hostagechecker.hostage.LifeStatus.DEAD;
 
-public class N12Provider extends AbstractListProvider
+public class N12Provider extends OnlineListProvider
 {
     public N12Provider()
     {
@@ -36,7 +35,7 @@ public class N12Provider extends AbstractListProvider
         CaptivityStatus captivityStatus = parseCaptivityStatus(hostageNode);
         LifeStatus lifeStatus = lastName.endsWith("ז\"ל") ? DEAD : ALIVE;
 
-        return new Hostage(firstName, sanitizeLastName(lastName), new Age(age), captivityStatus, lifeStatus);
+        return new Hostage(firstName, sanitizeLastName(lastName), age, captivityStatus, lifeStatus);
     }
 
     private static CaptivityStatus parseCaptivityStatus(JsonNode hostageNode)
