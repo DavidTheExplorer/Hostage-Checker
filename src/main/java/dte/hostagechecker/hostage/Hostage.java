@@ -16,4 +16,12 @@ public record Hostage(String firstName, String lastName, Double age, CaptivitySt
     {
         return this.lifeStatus == LifeStatus.ALIVE;
     }
+
+    public boolean isMinor()
+    {
+        if(!hasKnownAge())
+            return false;
+
+        return this.age < 18;
+    }
 }
