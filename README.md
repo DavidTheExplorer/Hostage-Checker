@@ -11,3 +11,6 @@ The response of its [single endpoint](https://hostage-checker.onrender.com/hosta
 - The "*last_updated*" date is relative to Israel's timezone.
 - Responses  are cached for **30 minutes** - Please open an issue if it goes above that.
 - The API is currently hosted on a free hosting - it may take a few minutes to get a response.
+
+## Credits
+Behind the scenes there's no sophisticated data tracking, what this service essentially does is to translate data from **N12** into easily readable format.
