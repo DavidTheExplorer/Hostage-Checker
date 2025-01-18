@@ -32,22 +32,10 @@ public class N12Provider extends OnlineListProvider
         String firstName = hostageNode.get("b").asText();
         String lastName = hostageNode.get("c").asText();
         Double age = NumberUtils.parseDouble(hostageNode.get("d").asText()).orElse(null);
-        CaptivityStatus captivityStatus = parseCaptivityStatus(hostageNode);
+        CaptivityStatus captivityStatus = hostageNode.get("status").asInt() == 1 ? IN_CAPTIVE : RETURNED;
         LifeStatus lifeStatus = lastName.endsWith("ז\"ל") ? DEAD : ALIVE;
 
         return new Hostage(firstName, sanitizeLastName(lastName), age, captivityStatus, lifeStatus);
-    }
-
-    private static CaptivityStatus parseCaptivityStatus(JsonNode hostageNode)
-    {
-        int status = hostageNode.get("status").asInt();
-
-        return switch(status)
-        {
-            case 1 -> IN_CAPTIVE;
-            case 2 -> RETURNED;
-            default -> throw new IllegalArgumentException(String.format("Unknown captivity status: %d", status));
-        };
     }
 
     //deletes the ז"ל (╯︵╰,)
