@@ -2,6 +2,8 @@ package dte.hostagechecker.exceptions.handler;
 
 import dte.hostagechecker.exceptions.HostageFetchingException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -12,9 +14,13 @@ import static org.springframework.http.HttpStatus.*;
 @RestControllerAdvice
 public class GlobalExceptionHandler
 {
+    private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
     @ExceptionHandler
     public ResponseEntity<ErrorResponse> handle(HostageFetchingException exception)
     {
+        LOGGER.error("Exception fetching the hostage list from \"{}\"", exception.getListProvider().getName(), exception.getCause());
+
         return ErrorResponse.asResponseEntity(INTERNAL_SERVER_ERROR, "Could not fetch the hostage list.");
     }
 

@@ -39,9 +39,7 @@ public class HostageService
         }
         catch(CompletionException exception)
         {
-            LOGGER.error("Exception fetching the hostage list from \"{}\"", this.hostageListProvider.getName(), exception.getCause());
-
-            throw new HostageFetchingException();
+            throw new HostageFetchingException(exception.getCause(), this.hostageListProvider);
         }
     }
 
