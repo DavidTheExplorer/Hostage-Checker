@@ -27,7 +27,7 @@ public class GlobalExceptionHandler
     @ExceptionHandler
     public ResponseEntity<ErrorResponse> handle(Exception exception)
     {
-        exception.printStackTrace();
+        LOGGER.error("Unexpected exception occurred", exception);
 
         return ErrorResponse.asResponseEntity(INTERNAL_SERVER_ERROR, "Internal Server Error");
     }
