@@ -12,11 +12,6 @@ public record Hostage(String firstName,
                       CaptivityStatus captivityStatus,
                       @JsonProperty("is_alive") LifeStatus lifeStatus)
 {
-    public boolean hasKnownAge()
-    {
-        return this.age != null;
-    }
-
     public boolean wasReturned()
     {
         return this.captivityStatus == CaptivityStatus.RETURNED;
@@ -31,9 +26,6 @@ public record Hostage(String firstName,
     @JsonIgnore
     public boolean isMinor()
     {
-        if(!hasKnownAge())
-            return false;
-
-        return this.age < 18;
+        return this.age != null && this.age < 18;
     }
 }
