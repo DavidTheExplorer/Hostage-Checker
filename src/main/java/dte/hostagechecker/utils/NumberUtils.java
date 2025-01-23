@@ -8,7 +8,7 @@ public class NumberUtils
     {
         //special case for Kfir - </3
         if(text.equals("שנתיים"))
-            return Optional.of(1D);
+            return Optional.of(2D);
 
         try
         {
