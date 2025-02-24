@@ -16,21 +16,13 @@ import java.util.concurrent.CompletableFuture;
 
 public abstract class OnlineListProvider implements HostageListProvider
 {
-    private final String name;
     private final URI endpoint;
     private final HttpClient httpClient = HttpClient.newBuilder().build();
     private final JsonMapper jsonMapper = new JsonMapper();
 
-    protected OnlineListProvider(String name, URI endpoint)
+    protected OnlineListProvider(URI endpoint)
     {
-        this.name = name;
         this.endpoint = endpoint;
-    }
-
-    @Override
-    public String getName()
-    {
-        return this.name;
     }
 
     @Override

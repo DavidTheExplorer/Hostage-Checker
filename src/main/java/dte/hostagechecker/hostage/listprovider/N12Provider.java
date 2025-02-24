@@ -27,7 +27,7 @@ public class N12Provider extends OnlineListProvider
 
     public N12Provider()
     {
-        super("N12", URI.create("https://n12-kidnappedfromisrael.cdn-il.com/website%2Fdata.json?v=1"));
+        super(URI.create("https://n12-kidnappedfromisrael.cdn-il.com/website%2Fdata.json?v=1"));
     }
 
     @Override
