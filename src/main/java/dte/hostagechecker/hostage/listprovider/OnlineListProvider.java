@@ -17,8 +17,6 @@ import java.util.concurrent.CompletableFuture;
 public abstract class OnlineListProvider implements HostageListProvider
 {
     private final String name;
-
-    //request data
     private final URI endpoint;
     private final HttpClient httpClient = HttpClient.newBuilder().build();
     private final JsonMapper jsonMapper = new JsonMapper();
@@ -38,35 +36,23 @@ public abstract class OnlineListProvider implements HostageListProvider
     @Override
     public CompletableFuture<Collection<Hostage>> fetchHostages()
     {
-        return createRequest().thenApply(this::toHostageList);
-    }
-
-    private CompletableFuture<HttpResponse<String>> createRequest()
-    {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(this.endpoint)
                 .build();
 
-        return this.httpClient.sendAsync(request, BodyHandlers.ofString());
+        return this.httpClient.sendAsync(request, BodyHandlers.ofString())
+                .thenApply(Exceptions.sneak().function(this::toHostageList));
     }
 
-    private Collection<Hostage> toHostageList(HttpResponse<String> response)
+    private Collection<Hostage> toHostageList(HttpResponse<String> response) throws Exception
     {
-        try
-        {
-            JsonNode bodyNode = this.jsonMapper.readTree(response.body());
+        JsonNode hostageArray = navigateToHostageArray(this.jsonMapper.readTree(response.body()));
 
-            return JsonNodeUtils.asList(navigateToHostageArray(bodyNode)).stream()
-                    .map(Exceptions.sneak().function(this::parseHostage))
-                    .toList();
-        }
-        catch(Exception exception)
-        {
-            throw new RuntimeException(exception);
-        }
+        return JsonNodeUtils.asList(hostageArray).stream()
+                .map(Exceptions.sneak().function(this::parseHostage))
+                .toList();
     }
 
     protected abstract JsonNode navigateToHostageArray(JsonNode bodyNode) throws Exception;
-
     protected abstract Hostage parseHostage(JsonNode hostageNode) throws Exception;
 }
