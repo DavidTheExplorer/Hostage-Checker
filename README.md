@@ -5,12 +5,13 @@ The response of its [single endpoint](https://hostage-checker.onrender.com/hosta
 - Numerical statistics(Commonly accessed).
 
 ## Response Structure
-![image](https://github.com/user-attachments/assets/7218b1e6-f7aa-4aba-918f-cb35a17e9d1a)
+![תמונה](https://github.com/user-attachments/assets/98540148-e983-4048-ad09-97d2037c4760)
 
 ## Important Info
 - The "*last_updated*" date is relative to Israel's timezone.
-- Responses  are cached for **30 minutes** - Please open an issue if it goes above that.
+- Responses are cached for **30 minutes** - Please open an issue if it goes above that.
 - The API is currently hosted on a free hosting - it may take a few minutes to get a response.
 
 ## Credits
-Behind the scenes there's no sophisticated data tracking, what this service essentially does is to translate data from **N12** into easily readable format.
+Behind the scenes there's no sophisticated data tracking, what this service does is to convert obscure data to easily parsable format.\
+The current data provider is *N12*.
