@@ -29,7 +29,7 @@ public class HostageService
     @Cacheable("hostages")
     public HostageListDTO getHostages()
     {
-        LOGGER.debug("Fetching hostage list from \"{}\".", this.hostageListProvider.getName());
+        LOGGER.debug("Fetching hostage list from \"{}\".", this.hostageListProvider.getClass().getSimpleName());
 
         try
         {

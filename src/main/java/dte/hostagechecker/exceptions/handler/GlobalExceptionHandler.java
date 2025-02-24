@@ -19,7 +19,7 @@ public class GlobalExceptionHandler
     @ExceptionHandler
     public ResponseEntity<ErrorResponse> handle(HostageFetchingException exception)
     {
-        LOGGER.error("Exception fetching the hostage list from \"{}\"", exception.getListProvider().getName(), exception.getCause());
+        LOGGER.error("Exception fetching the hostage list from \"{}\"", exception.getListProvider().getClass().getSimpleName(), exception.getCause());
 
         return ErrorResponse.asResponseEntity(INTERNAL_SERVER_ERROR, "Could not fetch the hostage list.");
     }

@@ -14,6 +14,6 @@ public class AgeSerializer extends JsonSerializer<Double>
         if(age == null)
             generator.writeString("Unknown");
         else
-            generator.writeNumber(age.intValue());
+            generator.writeNumber(age);
     }
 }

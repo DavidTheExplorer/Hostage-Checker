@@ -8,6 +8,8 @@ import dte.hostagechecker.hostage.LifeStatus;
 import dte.hostagechecker.utils.NumberUtils;
 
 import java.net.URI;
+import java.util.Collection;
+import java.util.List;
 
 import static dte.hostagechecker.hostage.CaptivityStatus.IN_CAPTIVE;
 import static dte.hostagechecker.hostage.CaptivityStatus.RETURNED;
@@ -18,9 +20,14 @@ import static dte.hostagechecker.hostage.LifeStatus.DEAD;
 
 public class N12Provider extends OnlineListProvider
 {
+    //these words may appear in first and last names
+    private static final Collection<String> EXCLUDED_WORDS = List.of(
+            "ז\"ל"
+            ,"אל\"ם" ,"אל\"מ" ,"סרן" ,"רס\"ב" ,"רס\"ם" ,"רס\"מ" ,"רס\"ל" ,"סמ\"ר" ,"סמל" ,"רב\"ט");
+
     public N12Provider()
     {
-        super("N12", URI.create("https://n12-kidnappedfromisrael.cdn-il.com/website%2Fdata.json?v=1"));
+        super(URI.create("https://n12-kidnappedfromisrael.cdn-il.com/website%2Fdata.json?v=1"));
     }
 
     @Override
@@ -39,15 +46,18 @@ public class N12Provider extends OnlineListProvider
         CaptivityStatus captivityStatus = hostageNode.get("status").asInt() == 1 ? IN_CAPTIVE : RETURNED;
         LifeStatus lifeStatus = lastName.endsWith("ז\"ל") ? DEAD : ALIVE;
 
-        return new Hostage(firstName, sanitizeLastName(lastName), gender, age, captivityStatus, lifeStatus);
+        //sanitization
+        firstName = sanitize(firstName);
+        lastName = sanitize(lastName);
+
+        return new Hostage(firstName, lastName, gender, age, captivityStatus, lifeStatus);
     }
 
-    //deletes the ז"ל (╯︵╰,)
-    private static String sanitizeLastName(String lastName)
+    private String sanitize(String text)
     {
-        if(!lastName.endsWith("ז\"ל"))
-            return lastName;
+        for(String word : EXCLUDED_WORDS)
+            text = text.replace(word, "");
 
-        return lastName.substring(0, lastName.indexOf("ז\"ל") -1);
+        return text.trim();
     }
 }
