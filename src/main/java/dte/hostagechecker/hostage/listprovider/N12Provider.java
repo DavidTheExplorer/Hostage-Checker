@@ -31,13 +31,13 @@ public class N12Provider extends OnlineListProvider
     }
 
     @Override
-    protected JsonNode navigateToHostageArray(JsonNode bodyNode) throws Exception
+    protected JsonNode navigateToHostageArray(JsonNode bodyNode)
     {
         return bodyNode.get("rows"); //are the hostages just database rows?
     }
 
     @Override
-    protected Hostage parseHostage(JsonNode hostageNode) throws Exception
+    protected Hostage parseHostage(JsonNode hostageNode)
     {
         String firstName = hostageNode.get("b").asText();
         String lastName = hostageNode.get("c").asText();

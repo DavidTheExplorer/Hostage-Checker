@@ -2,7 +2,6 @@ package dte.hostagechecker.hostage.listprovider;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.machinezoo.noexception.Exceptions;
 import dte.hostagechecker.hostage.Hostage;
 import dte.hostagechecker.utils.JsonNodeUtils;
 
@@ -33,18 +32,18 @@ public abstract class OnlineListProvider implements HostageListProvider
                 .build();
 
         return this.httpClient.sendAsync(request, BodyHandlers.ofString())
-                .thenApply(Exceptions.sneak().function(this::toHostageList));
+                .thenApply(this::toHostageList);
     }
 
-    private Collection<Hostage> toHostageList(HttpResponse<String> response) throws Exception
+    private Collection<Hostage> toHostageList(HttpResponse<String> response)
     {
-        JsonNode hostageArray = navigateToHostageArray(this.jsonMapper.readTree(response.body()));
+        JsonNode hostageArray = navigateToHostageArray(JsonNodeUtils.readTree(this.jsonMapper, response.body()));
 
         return JsonNodeUtils.asList(hostageArray).stream()
-                .map(Exceptions.sneak().function(this::parseHostage))
+                .map(this::parseHostage)
                 .toList();
     }
 
-    protected abstract JsonNode navigateToHostageArray(JsonNode bodyNode) throws Exception;
-    protected abstract Hostage parseHostage(JsonNode hostageNode) throws Exception;
+    protected abstract JsonNode navigateToHostageArray(JsonNode bodyNode);
+    protected abstract Hostage parseHostage(JsonNode hostageNode);
 }
