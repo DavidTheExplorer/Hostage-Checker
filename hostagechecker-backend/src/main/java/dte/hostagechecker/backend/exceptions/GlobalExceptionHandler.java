@@ -18,7 +18,7 @@ public class GlobalExceptionHandler
     @ExceptionHandler
     public ProblemDetail handle(HostageFetchingException exception)
     {
-        LOGGER.error("Exception fetching the hostage list from \"{}\"", exception.getListProvider().getClass().getSimpleName(), exception.getCause());
+        LOGGER.error("Exception fetching the latest hostage list", exception.getCause());
 
         return ProblemDetail.forStatusAndDetail(INTERNAL_SERVER_ERROR, "Could not fetch the hostage list.");
     }
