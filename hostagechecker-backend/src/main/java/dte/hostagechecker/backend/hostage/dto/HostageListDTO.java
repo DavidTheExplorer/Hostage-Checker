@@ -1,4 +1,4 @@
-package dte.hostagechecker.dto;
+package dte.hostagechecker.backend.hostage.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,4 +1,4 @@
-package dte.hostagechecker.exceptions.handler;
+package dte.hostagechecker.backend.exceptions;
 
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;

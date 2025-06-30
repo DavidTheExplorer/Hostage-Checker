@@ -1,4 +1,4 @@
-package dte.hostagechecker.dto;
+package dte.hostagechecker.backend.hostage.dto;
 
 import dte.hostagechecker.hostage.Hostage;
 

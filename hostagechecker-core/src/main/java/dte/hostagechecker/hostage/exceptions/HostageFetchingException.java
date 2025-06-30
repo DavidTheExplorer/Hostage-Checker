@@ -1,4 +1,4 @@
-package dte.hostagechecker.exceptions;
+package dte.hostagechecker.hostage.exceptions;
 
 import dte.hostagechecker.hostage.listprovider.HostageListProvider;
 

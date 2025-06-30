@@ -1,18 +1,17 @@
-package dte.hostagechecker.controllers;
+package dte.hostagechecker.backend.hostage;
 
-import dte.hostagechecker.dto.HostageListDTO;
-import dte.hostagechecker.services.HostageService;
+import dte.hostagechecker.backend.hostage.dto.HostageListDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/hostages")
-public class HostagesController
+public class HostageController
 {
     private final HostageService hostageService;
 
-    public HostagesController(HostageService hostageService)
+    public HostageController(HostageService hostageService)
     {
         this.hostageService = hostageService;
     }

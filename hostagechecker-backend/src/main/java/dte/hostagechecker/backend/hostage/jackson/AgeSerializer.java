@@ -1,4 +1,4 @@
-package dte.hostagechecker.jackson;
+package dte.hostagechecker.backend.hostage.jackson;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;

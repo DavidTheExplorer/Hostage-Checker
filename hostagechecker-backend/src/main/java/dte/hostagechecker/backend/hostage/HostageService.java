@@ -1,7 +1,7 @@
-package dte.hostagechecker.services;
+package dte.hostagechecker.backend.hostage;
 
-import dte.hostagechecker.dto.HostageListDTO;
-import dte.hostagechecker.exceptions.HostageFetchingException;
+import dte.hostagechecker.backend.hostage.dto.HostageListDTO;
+import dte.hostagechecker.hostage.exceptions.HostageFetchingException;
 import dte.hostagechecker.hostage.listprovider.HostageListProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

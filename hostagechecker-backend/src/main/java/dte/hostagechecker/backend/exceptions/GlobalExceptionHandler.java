@@ -1,7 +1,6 @@
-package dte.hostagechecker.exceptions.handler;
+package dte.hostagechecker.backend.exceptions;
 
-import dte.hostagechecker.exceptions.HostageFetchingException;
-
+import dte.hostagechecker.hostage.exceptions.HostageFetchingException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
