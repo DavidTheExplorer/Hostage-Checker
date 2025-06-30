@@ -16,7 +16,7 @@ import java.util.concurrent.CompletableFuture;
 public abstract class OnlineListProvider implements HostageListProvider
 {
     private final URI endpoint;
-    private final HttpClient httpClient = HttpClient.newBuilder().build();
+    private final HttpClient httpClient = HttpClient.newHttpClient();
     private final JsonMapper jsonMapper = new JsonMapper();
 
     protected OnlineListProvider(URI endpoint)

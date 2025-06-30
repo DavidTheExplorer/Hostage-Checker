@@ -21,9 +21,7 @@ import static dte.hostagechecker.hostage.LifeStatus.DEAD;
 public class N12Provider extends OnlineListProvider
 {
     //these words may appear in first and last names
-    private static final Collection<String> EXCLUDED_WORDS = List.of(
-            "ז\"ל"
-            ,"אל\"ם" ,"אל\"מ" ,"סרן" ,"רס\"ב" ,"רס\"ם" ,"רס\"מ" ,"רס\"ל" ,"סמ\"ר" ,"סמל" ,"רב\"ט");
+    private static final Collection<String> EXCLUDED_WORDS = List.of("ז\"ל" ,"אל\"ם" ,"אל\"מ" ,"סרן" ,"רס\"ב" ,"רס\"ם" ,"רס\"מ" ,"רס\"ל" ,"סמ\"ר" ,"סמל" ,"רב\"ט");
 
     public N12Provider()
     {
@@ -53,7 +51,7 @@ public class N12Provider extends OnlineListProvider
         return new Hostage(firstName, lastName, gender, age, captivityStatus, lifeStatus);
     }
 
-    private String sanitize(String text)
+    private static String sanitize(String text)
     {
         for(String word : EXCLUDED_WORDS)
             text = text.replace(word, "");
