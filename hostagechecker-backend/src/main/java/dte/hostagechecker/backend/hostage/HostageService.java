@@ -39,7 +39,7 @@ public class HostageService
         }
         catch(CompletionException exception)
         {
-            throw new HostageFetchingException(exception.getCause(), this.hostageListProvider);
+            throw new HostageFetchingException(exception.getCause());
         }
     }
 
