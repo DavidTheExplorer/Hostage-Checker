@@ -2,7 +2,7 @@ package dte.hostagechecker.backend.hostage;
 
 import dte.hostagechecker.backend.hostage.dto.HostageListDTO;
 import dte.hostagechecker.hostage.exceptions.HostageFetchingException;
-import dte.hostagechecker.hostage.listprovider.HostageListProvider;
+import dte.hostagechecker.hostage.repository.HostageRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
@@ -17,23 +17,23 @@ import static java.util.concurrent.TimeUnit.MINUTES;
 @Service
 public class HostageService
 {
-    private final HostageListProvider hostageListProvider;
+    private final HostageRepository hostageRepository;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HostageService.class);
 
-    public HostageService(HostageListProvider hostageListProvider)
+    public HostageService(HostageRepository hostageRepository)
     {
-        this.hostageListProvider = hostageListProvider;
+        this.hostageRepository = hostageRepository;
     }
 
     @Cacheable("hostages")
     public HostageListDTO getHostages()
     {
-        LOGGER.debug("Fetching hostage list from \"{}\".", this.hostageListProvider.getClass().getSimpleName());
+        LOGGER.debug("Fetching hostage list from \"{}\".", this.hostageRepository.getClass().getSimpleName());
 
         try
         {
-            return this.hostageListProvider.fetchHostages()
+            return this.hostageRepository.getHostages()
                     .thenApply(HostageListDTO::of)
                     .join();
         }

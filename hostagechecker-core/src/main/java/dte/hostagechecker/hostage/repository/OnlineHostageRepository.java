@@ -1,4 +1,4 @@
-package dte.hostagechecker.hostage.listprovider;
+package dte.hostagechecker.hostage.repository;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.json.JsonMapper;
@@ -13,19 +13,19 @@ import java.net.http.HttpResponse.BodyHandlers;
 import java.util.Collection;
 import java.util.concurrent.CompletableFuture;
 
-public abstract class OnlineListProvider implements HostageListProvider
+public abstract class OnlineHostageRepository implements HostageRepository
 {
     private final URI endpoint;
     private final HttpClient httpClient = HttpClient.newHttpClient();
     private final JsonMapper jsonMapper = new JsonMapper();
 
-    protected OnlineListProvider(URI endpoint)
+    protected OnlineHostageRepository(URI endpoint)
     {
         this.endpoint = endpoint;
     }
 
     @Override
-    public CompletableFuture<Collection<Hostage>> fetchHostages()
+    public CompletableFuture<Collection<Hostage>> getHostages()
     {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(this.endpoint)

@@ -2,8 +2,8 @@ package dte.hostagechecker.backend.hostage;
 
 import dte.hostagechecker.backend.hostage.jackson.HostageMixin;
 import dte.hostagechecker.hostage.Hostage;
-import dte.hostagechecker.hostage.listprovider.HostageListProvider;
-import dte.hostagechecker.hostage.listprovider.N12Provider;
+import dte.hostagechecker.hostage.repository.HostageRepository;
+import dte.hostagechecker.hostage.repository.N12Repository;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,9 +12,9 @@ import org.springframework.context.annotation.Configuration;
 public class HostageConfig
 {
     @Bean
-    public HostageListProvider hostageListProvider()
+    public HostageRepository hostageRepository()
     {
-        return new N12Provider();
+        return new N12Repository();
     }
 
     @Bean
