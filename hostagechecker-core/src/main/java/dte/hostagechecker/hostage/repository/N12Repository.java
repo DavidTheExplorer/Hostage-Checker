@@ -1,4 +1,4 @@
-package dte.hostagechecker.hostage.listprovider;
+package dte.hostagechecker.hostage.repository;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import dte.hostagechecker.hostage.CaptivityStatus;
@@ -18,12 +18,12 @@ import static dte.hostagechecker.hostage.Gender.MALE;
 import static dte.hostagechecker.hostage.LifeStatus.ALIVE;
 import static dte.hostagechecker.hostage.LifeStatus.DEAD;
 
-public class N12Provider extends OnlineListProvider
+public class N12Repository extends OnlineHostageRepository
 {
     //these words may appear in first and last names
     private static final Collection<String> EXCLUDED_WORDS = List.of("ז\"ל" ,"אל\"ם" ,"אל\"מ" ,"סרן" ,"רס\"ב" ,"רס\"ם" ,"רס\"מ" ,"רס\"ל" ,"סמ\"ר" ,"סמל" ,"רב\"ט");
 
-    public N12Provider()
+    public N12Repository()
     {
         super(URI.create("https://n12-kidnappedfromisrael.cdn-il.com/website%2Fdata.json?v=1"));
     }
