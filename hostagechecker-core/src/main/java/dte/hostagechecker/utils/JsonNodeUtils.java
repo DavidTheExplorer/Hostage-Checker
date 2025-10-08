@@ -1,8 +1,6 @@
 package dte.hostagechecker.utils;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.databind.JsonNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,17 +18,5 @@ public class JsonNodeUtils
             children.add(child);
 
         return children;
-    }
-
-    public static JsonNode readTree(ObjectMapper objectMapper, String json)
-    {
-        try
-        {
-            return objectMapper.readTree(json);
-        }
-        catch(JsonProcessingException exception)
-        {
-            throw new RuntimeException("Can't parse the provided JSON", exception);
-        }
     }
 }

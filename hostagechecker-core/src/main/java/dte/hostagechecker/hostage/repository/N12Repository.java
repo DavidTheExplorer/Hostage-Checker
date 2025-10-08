@@ -1,11 +1,11 @@
 package dte.hostagechecker.hostage.repository;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import dte.hostagechecker.hostage.CaptivityStatus;
 import dte.hostagechecker.hostage.Gender;
 import dte.hostagechecker.hostage.Hostage;
 import dte.hostagechecker.hostage.LifeStatus;
 import dte.hostagechecker.utils.NumberUtils;
+import tools.jackson.databind.JsonNode;
 
 import java.net.URI;
 import java.util.Collection;
@@ -37,10 +37,10 @@ public class N12Repository extends OnlineHostageRepository
     @Override
     protected Hostage parseHostage(JsonNode hostageNode)
     {
-        String firstName = hostageNode.get("b").asText();
-        String lastName = hostageNode.get("c").asText();
-        Gender gender = hostageNode.get("e").asText().equals("אישה") ? FEMALE : MALE;
-        Double age = NumberUtils.parseDouble(hostageNode.get("d").asText()).orElse(null);
+        String firstName = hostageNode.get("b").asString();
+        String lastName = hostageNode.get("c").asString();
+        Gender gender = hostageNode.get("e").asString().equals("אישה") ? FEMALE : MALE;
+        Double age = NumberUtils.parseDouble(hostageNode.get("d").asString()).orElse(null);
         CaptivityStatus captivityStatus = hostageNode.get("status").asInt() == 1 ? IN_CAPTIVE : RETURNED;
         LifeStatus lifeStatus = lastName.endsWith("ז\"ל") ? DEAD : ALIVE;
 

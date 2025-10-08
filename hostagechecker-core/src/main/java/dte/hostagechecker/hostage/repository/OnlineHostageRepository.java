@@ -1,9 +1,9 @@
 package dte.hostagechecker.hostage.repository;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.json.JsonMapper;
 import dte.hostagechecker.hostage.Hostage;
 import dte.hostagechecker.utils.JsonNodeUtils;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.json.JsonMapper;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -37,7 +37,7 @@ public abstract class OnlineHostageRepository implements HostageRepository
 
     private Collection<Hostage> toHostageList(HttpResponse<String> response)
     {
-        JsonNode hostageArray = navigateToHostageArray(JsonNodeUtils.readTree(this.jsonMapper, response.body()));
+        JsonNode hostageArray = navigateToHostageArray(this.jsonMapper.readTree(response.body()));
 
         return JsonNodeUtils.asList(hostageArray).stream()
                 .map(this::parseHostage)
